@@ -7,7 +7,6 @@ using namespace std;
 #include "full_mat_c.hpp"
 #include "mesh.hpp"
 #include "SV.hpp"
-typedef double (*pfn) (double);
 
 int gg = 10; // Gravity Constant
 double f(double x) { return (x>0)?1:2;};
@@ -45,36 +44,27 @@ void SV(int n,int itermax)
   dt[0] = m.geth() / (3*lambda[0]);
 
   for (int i  = 0 ; i  < n ; i++)
-  {
-    Fq[0][i] =  (gg/4)*(H[0][i]*H[0][i] + H[0][i+1]*H[0][i+1]);
-  }
+  Fq[0][i] =  (gg/4)*(H[0][i]*H[0][i] + H[0][i+1]*H[0][i+1]);
+
   q[1][0] = q[0][0] - (dt[0]/ m.geth()) * (Fq[0][0]);
-  cout << "*****" << endl;
-  cout << q[1][0] ;
-  cout << "*****" << endl;
 
   for (int i  = 1 ; i  <= n ; i++)
-  {
-    q[1][i] = q[0][i] - (dt[0] / m.geth())*(Fq[0][i]-Fq[0][i-1]);
-  }
+  q[1][i] = q[0][i] - (dt[0] / m.geth())*(Fq[0][i]-Fq[0][i-1]);
 
   for (int i  = 0 ; i  < n ; i++)
-  {
-    FH[0][i] = (1/2)*(q[0][i] + q[1][i]) - (dt[0]/2)*(H[0][i+1] - H[0][i]);
-  }
+  FH[0][i] = (1/2)*(q[0][i] + q[1][i]) - (dt[0]/2)*(H[0][i+1] - H[0][i]);
 
   H[1][0] = H[0][0] - (dt[0] / m.geth()) * (FH[0][0]);
+
   for (int i  = 1 ; i  <= n ; i++)
-  {
-    H[1][i] = H[0][i] - (dt[0] / m.geth())*(FH[0][i]-FH[0][i-1]);
-  }
+  H[1][i] = H[0][i] - (dt[0] / m.geth())*(FH[0][i]-FH[0][i-1]);
 
   H[1][n+1] = H[1][n];
   q[1][n+1] = q[1][n];
   for (int k=0;k<=n+1;k++)  M[1][k] = fii(q[1][k], H[1][k]);
 
   double time=0.0;
-  double Tmax = 20;
+  double Tmax = 2000;
 
   for (int iter = 2; iter < itermax-2; iter ++)
   {
@@ -112,9 +102,9 @@ void SV(int n,int itermax)
     q[iter][n+1] = q[iter][n];
   }
 
-  cout << "Fq"  << Fq;
+  //cout << "Fq"  << Fq;
   cout << "q"   << q;
-  cout << "FH" << FH;
+  //cout << "FH" << FH;
   cout << "H"  << H;
-  cout << "M"  << M;
+  //cout << "M"  << M;
 }

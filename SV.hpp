@@ -9,9 +9,8 @@ using namespace std;
 #include "full_mat_c.hpp"
 #include "abstract_mat_c.hpp"
 #include "mesh.hpp"
-typedef double (*pfn) (double);
 
 
 void SV(int i, int itermax);
 
-#endif // VOLFINI_H
+#endif 
