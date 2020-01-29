@@ -1,4 +1,4 @@
-# Finite Volume Schema in order to APPROXIMATE the exact solution
+# Finite Volume Saint-Venant Schema in order to APPROXIMATE the exact solution
 
 # How to Compile:
 
