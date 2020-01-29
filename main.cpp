@@ -9,6 +9,6 @@ using namespace std;
 #include "SV.hpp"
 
 int main(){
-  SV(4, 6);
+  SV(8, 10);
   return 0;
 }

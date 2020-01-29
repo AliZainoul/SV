@@ -12,6 +12,6 @@ using namespace std;
 typedef double (*pfn) (double);
 
 
-bool SV(int i, int itermax);
+void SV(int i, int itermax);
 
 #endif // VOLFINI_H
